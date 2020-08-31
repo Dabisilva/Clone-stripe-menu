@@ -1,11 +1,11 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react';
 
-const Context = createContext()
+export const Context = createContext()
 
 export function DropdownProvider({ children }) {
     const [options, setOptions] = useState([])
     const [targetId, setTargetId] = useState(null)
-    const [cachedId, setChadedId] = useState(null)
+    const [cachedId, setCachedId] = useState(null)
 
     const registerOption = useCallback(({
         id,
@@ -26,7 +26,7 @@ export function DropdownProvider({ children }) {
         ])
     }, [setOptions])
 
-    const updateOptionsProps = useCallback((optionId, props) => {
+    const updateOptionProps = useCallback((optionId, props) => {
         setOptions(items => 
             items.map(item => {
                 if(item.id === optionId){
@@ -38,9 +38,9 @@ export function DropdownProvider({ children }) {
         )
     }, [setOptions])
 
-    const getOptionById = useCallback((id) => {
-        options.find((item) => item.id === id)
-    },[options])
+    const getOptionById = useCallback(
+        (id) => options.find((item) => item.id === id)
+    ,[options])
 
 
     const deleteOptionById = useCallback((id) => {
@@ -48,21 +48,21 @@ export function DropdownProvider({ children }) {
     }, [setOptions])
 
     useEffect(() => {
-        if(targetId != null)setChadedId(targetId)
+        if(targetId != null)setCachedId(targetId)
     },[targetId])
 
     return (
         <Context.Provider
             value={{
                 registerOption,
-                updateOptionsProps,
+                updateOptionProps,
                 getOptionById,
                 deleteOptionById,
                 options,
                 targetId,
                 setTargetId,
                 cachedId,
-                setChadedId
+                setCachedId
             }}
         >
             {children}

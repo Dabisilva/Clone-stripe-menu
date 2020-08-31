@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DropdownProvider, DropdownOption } from '../Dropdown'
+import { DropdownProvider, DropdownOption, DropdownRoot } from '../Dropdown'
 
 import { Company, Developers, Products } from '../Content'
 import { Container, DropDownStyles } from './styles';
@@ -16,6 +16,7 @@ function Navbar() {
                                 <DropdownOption
                                     name="Produtos"
                                     content={Products}
+                                    backgroundHeight={286}
                                 />
                             </li>
 
@@ -23,6 +24,7 @@ function Navbar() {
                                 <DropdownOption
                                     name="Desenvolvedores"
                                     content={Developers}
+                                    backgroundHeight={167}
                                 />
                             </li>
 
@@ -30,10 +32,13 @@ function Navbar() {
                                 <DropdownOption
                                     name="Empresa"
                                     content={Company}
+                                    backgroundHeight={286}
                                 />
                             </li>
                         </ul>
                     </Container>
+                    
+                    <DropdownRoot/>
                 </DropDownStyles>
             </DropdownProvider>
         </>
